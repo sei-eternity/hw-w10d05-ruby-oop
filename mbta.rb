@@ -15,7 +15,6 @@ class Subway
         @end_station = Station.new(end_station)
         
         @start_station_index = @lines[@start_line.line.to_sym].index(@start_station.station)
-        @start_station_name = @lines[@start_line.line.to_sym]
         @end_station_index = @lines[@end_line.line.to_sym].index(@end_station.station)
         @first_transaction_index =  @lines[@start_line.line.to_sym].index('Park Street')
         @second_transaction_index =  @lines[@end_line.line.to_sym].index('Park Street')
@@ -61,7 +60,7 @@ end_line =  gets.chomp
 p "Please inter the last station : " 
 end_station =  gets.chomp
 puts mbta. stops_between_stations(start_line, start_station, end_line, end_station)
-#============================ test result ============================#
+#============================ test resource ============================#
 puts mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Alewife')#0
 puts mbta.stops_between_stations('Red', 'Alewife', 'Red', 'South Station')#7
 puts mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore')#6
