@@ -62,6 +62,10 @@ class Subway
   
 
   subway_lines = {
-          Red: Line.new("Red",red_array)
+          Red: Line.new("Red",red_array),
+          Green: Line.new("Green",green_array),
+          Orange: Line.new("Orange",orange_array)
   }
   subway_lines[:Red].prent_stations
+  subway_lines[:Green].prent_stations
+  subway_lines[:Orange].prent_stations
