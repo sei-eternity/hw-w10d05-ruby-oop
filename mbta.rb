@@ -1,6 +1,4 @@
 class Subway
-  attr_reader :SUBWAY_MAP_LINES
-
   def initialize
     @SUBWAY_MAP_LINES = {
         Red: Line.new(%w<South\ Station Park\ Street Kendall Central Harvard Porter Davis Alewife>.map { |s| Station.new(s) }),
@@ -10,10 +8,10 @@ class Subway
   end
 
   def stop_at_one_station(line, first_station, second_station)
-    line = line.to_sym 
+    line = line.to_sym
     (@SUBWAY_MAP_LINES[line].line.index { |s| s.station == first_station } - @SUBWAY_MAP_LINES[line].line.index { |s| s.station == second_station }).abs
   end
-  
+
   def stops_between_stations(start_line, start_station, end_line, end_station)
     if start_line == end_line
       p stop_at_one_station(start_line, start_station, end_station)
@@ -52,4 +50,3 @@ mbta = Subway.new
 mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Alewife') # 0
 mbta.stops_between_stations('Red', 'Alewife', 'Red', 'South Station') # 7
 mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 6
-
