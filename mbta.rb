@@ -1,13 +1,11 @@
 class Subway
-attr_accessor :lines
+
 attr_accessor :count_stops
 #################################################################################
 
 def initialize
 @count_stops=0
-@lines=[] 
-@start_line_stations=[] 
-@end_line_stations=[]
+
 end
  #################################################################################   
 
