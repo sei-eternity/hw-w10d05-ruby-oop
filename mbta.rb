@@ -59,38 +59,14 @@ class Station
     end
 end
 
+# Include the stations Data file
+require_relative "./stations"
+
 # Creating stations array for each line (Each array contains multiple Station objects/instances)
-red_stations = [
-    Station.new("South Station"),
-    Station.new("Park Street"),
-    Station.new("Kendall"),
-    Station.new("Central"),
-    Station.new("Harvard"),
-    Station.new("Porter"),
-    Station.new("Davis"),
-    Station.new("Alewife")
-]
-
-green_stations = [
-    Station.new("Government Center"),
-    Station.new("Park Street"),
-    Station.new("Boylston"),
-    Station.new("Arlington"),
-    Station.new("Copley"),
-    Station.new("Hynes"),
-    Station.new("Kenmore")
-]
-
-orange_stations = [
-    Station.new("North Station"),
-    Station.new("Haymarket"),
-    Station.new("Park Street"),
-    Station.new("State"),
-    Station.new("Downtown Crossing"),
-    Station.new("Chinatown"),
-    Station.new("Back Bay"),
-    Station.new("Forest Hills")
-]
+# The data for the names of the stations are retrived from "stations.rb" file
+red_stations = StationsData.get_data[:Red].map { |station_name| Station.new(station_name) }
+green_stations = StationsData.get_data[:Green].map { |station_name| Station.new(station_name) }
+orange_stations = StationsData.get_data[:Orange].map { |station_name| Station.new(station_name) }
 
 # Creating lines with their respective stations
 red_line = Line.new("Red", red_stations)
@@ -99,6 +75,8 @@ orange_line = Line.new("Orange", orange_stations)
 
 # Create an instance of Subway and initialize it with the lines created previusly (red, green, and orange)
 mbta = Subway.new([red_line, green_line, orange_line])
+
+# Test Cases
 puts mbta.stops_between_stations('Red', 'Alewife', 'Red', 'Alewife') # 0
 puts mbta.stops_between_stations('Red', 'Alewife', 'Red', 'South Station') # 7
 puts mbta.stops_between_stations('Red', 'South Station', 'Green', 'Kenmore') # 6
