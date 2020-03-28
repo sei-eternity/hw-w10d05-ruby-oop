@@ -37,12 +37,11 @@ def stops_between_stations(start_line, start_station, end_line, end_station)
         line[line.index(end_station)..line.index(start_station)].map do |station|
         if station != start_station
          @count_stops+=1
-                              
         end
-                        end
-                   end
-                end
-            end
+        end
+        end
+        end
+        end
  ##################################################################################################
     # start_line not equal end_line
     elsif start_line != end_line
