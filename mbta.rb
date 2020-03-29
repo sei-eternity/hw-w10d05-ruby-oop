@@ -36,7 +36,7 @@ end
 end
 
 
-class Line 
+class Line < Subway
      attr_accessor :stations, :subway_lines 
       def initialize(subway_lines,stations)
         @stations=stations
@@ -45,7 +45,7 @@ class Line
       
 end
 
-class Station 
+class Station < Subway
     attr_accessor :station
     def initialize(station)
       @station=station
