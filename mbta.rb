@@ -11,18 +11,25 @@ class Subway
     
     def stops_between_stations(start_line, start_station, end_line, end_station)
 
-        @start_line = Line.new(start_line, start_station)
-        @start_station = Station.new(start_station)
-        @end_line = Line.new(end_line, end_station)
-        @end_station = Station.new(end_station)
+    # Make a new instance from Class Line. @lines[start_line.to_sym] are the all stations on that line(array)
+        @line_start= Line.new(start_line, @lines[start_line.to_sym])
+      
+        @line_end = Line.new(end_line, @lines[end_line.to_sym])
 
+    #  find the index of each station by find index method . The stations come from Class Line
+        start_station_index= @line_start.stations.find_index { |station| station.name == start_station }
+        end_station_index=  @line_end.stations.find_index { |station| station.name == end_station }
+        park_street_start_station_index= @line_start.stations.find_index { |station| station.name == 'Park Street' }
+        park_street_end_station_index=   @line_end.stations.find_index { |station| station.name == 'Park Street' }
+        
+        
         if start_line == end_line
-            stops = (lines[start_line.to_sym].index(start_station) - lines[end_line.to_sym].index(end_station) ).abs
+            stops = ( start_station_index -  end_station_index).abs
 
            
         else 
-            stops =  (lines[start_line.to_sym].index(start_station) - lines[start_line.to_sym].index('Park Street') ).abs
-            stops += (lines[end_line.to_sym].index(end_station) -  lines[end_line.to_sym].index('Park Street') ).abs 
+            stops =  (start_station_index - park_street_start_station_index).abs
+            stops += ( end_station_index -   park_street_end_station_index ).abs 
  
         end
         p " #{stops} stops "
@@ -34,19 +41,20 @@ end
     
   # One line, all the stations on that line
   class Line
-    attr_accessor :line , :station ;
+    attr_accessor :line , :stations ;
 
-    def initialize ( line , station)
+    def initialize ( line , stations)
     @line = line
-    @station=Station.new(station)
+    # map over the stations to make an instance of each statation from Class station 
+    @stations = stations.map { |station_name| Station.new(station_name) } 
     end
 end 
   
   # One station
   class Station 
-    attr_accessor :station  ;
-        def initialize (station)
-            @station=station
+    attr_accessor :name ;
+        def initialize (name)
+            @name=name
         end
     end 
 
